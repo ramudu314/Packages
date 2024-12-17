@@ -1,36 +1,46 @@
 import React from 'react';
 import { useNavigate } from "react-router-dom";
-import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, Button as ChakraButton } from '@chakra-ui/react';
-import Button from '../../utils/SytleButton';
+import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, Button as ChakraButton, Flex, Box } from '@chakra-ui/react';
 
 const Home: React.FC = () => {
-  const Navigate = useNavigate();
+  const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = React.useState(false);
 
   const handleClick = () => {
-    Navigate('/add');
-    setIsModalOpen(true); // Open the modal on button click
+    navigate('/add');
+    setIsModalOpen(true); 
   };
 
   const closeModal = () => {
-    setIsModalOpen(false); // Close the modal
+    setIsModalOpen(false); 
   };
 
   return (
     <>
       <h1 className="text-xl m-20 text-center">Welcome to Favorite NPM Packages</h1>
 
-      <div className=" flex items-center justify-center align-middle">
-        <div className="text-center border-2 border-gray-300 p-20 w-8/12 rounded-lg">
-          <p className=" text-xl m-7 text-sm text-gray-600">You don't have any favs yet. Please add.</p>
+      <Flex
+        direction={{ base: 'column', md: 'row' }}
+        align="center"
+        justify="center"
+        p={5}
+      >
+        <Box
+          textAlign="center"
+          borderWidth="2px"
+          p={5}
+          w={{ base: "80%", md: "50%" }}
+          rounded="lg"
+        >
+          <p className="text-xl m-7 text-sm text-gray-600">You don't have any favs yet. Please add.</p>
           <ChakraButton onClick={handleClick} colorScheme="teal">
             Add fav
           </ChakraButton>
-        </div>
-      </div>
+        </Box>
+      </Flex>
 
       {/* Modal Component */}
-      <Modal isOpen={isModalOpen} onClose={closeModal} size="sm">
+      <Modal isOpen={isModalOpen} onClose={closeModal} size={{ base: 'full', md: 'sm' }}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Success</ModalHeader>
